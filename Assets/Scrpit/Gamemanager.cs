@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gamemanager : SingleTon<Gamemanager>
 {
     public GameObject monster;
+    public GameObject Player;
     public int Level=1;
     public int PlayerCoin = 0;
     public int playerdamage = 1;
@@ -25,6 +26,15 @@ public class Gamemanager : SingleTon<Gamemanager>
     public void Gamestart(int num)
     {
         monster = Resources.Load<GameObject>("Prefabs/Monster"+ num);
+        Player = Resources.Load<GameObject>("Prefabs/HeroKnight");
+
+        Instantiate(Player);
+        Instantiate(monster);
+    }
+    public void Monstercreate(int num)
+    {
+        monster = Resources.Load<GameObject>("Prefabs/Monster" + num);
+
         Instantiate(monster);
     }
     public void LevelUP()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public int currentlv = 0;
+    public int currentlv = 1;
     public int Level = 0;
     public int Hp=0;
     public float delaytime = 0f;
@@ -24,24 +24,15 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Takedamage();
+       
     }
-        public void Takedamage()
-    {
 
-        delaytime += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && delaytime > 0.25f)
-        {
-            Hp = Hp - Gamemanager.Instance.playerdamage;
-            monsteranimator.SetBool("Hit", true);
-            Debug.Log(Hp);
-
-        }
-        else
-        {
-           monsteranimator.SetBool("Hit", false);
-        }
-        if(Hp<=0)
+     public void Takedamage()
+     {
+        StartCoroutine(Hitaction());
+        Hp = Hp - Gamemanager.Instance.playerdamage;
+        Debug.Log(Hp);
+        if (Hp <= 0)
         {
             Die();
             Changemonster();
@@ -49,13 +40,24 @@ public class Monster : MonoBehaviour
     }
     public void Die()
     {
+
         Gamemanager.Instance.LevelUP();
         Hp = Gamemanager.Instance.Level * 30;
     }
 
     public void Changemonster()
     {
-        Gamemanager.Instance.Gamestart(2);
+        Gamemanager.Instance.Monstercreate(Gamemanager.Instance.Level);
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator Hitaction()
+    {
+        monsteranimator.SetBool("Hit", true);
+        // 현재 애니메이션 길이를 가져와 그 시간만큼 대기
+        float animationLength = monsteranimator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animationLength);
+
+        monsteranimator.SetBool("Hit", false);
     }
 }
