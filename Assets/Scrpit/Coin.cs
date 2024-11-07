@@ -36,7 +36,6 @@ public class Coin : SingleTon<Coin>
 
             transform.position = position;
 
-            // 목표 지점에 도달하면 오브젝트 삭제
             if (t >= 1f)
             {
                 // Destroy(gameObject);
@@ -77,11 +76,18 @@ public class Coin : SingleTon<Coin>
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                drop = true; 
-                timeElapsed = 0f;
-                t = 0f;
-                startPosition = transform.position;
-                controlPoint = startPosition + Vector3.up * 2f;
+                if (hit.transform.position == this.transform.position)
+                {
+                    drop = true;
+                    timeElapsed = 0f;
+                    t = 0f;
+                    startPosition = transform.position;
+                    controlPoint = startPosition + Vector3.up * 2f;
+
+                    GameObject obj1 = GameObject.Find("Cube");
+                    Debug.Log(obj1);
+                    target = obj1.transform;
+                }
             }
         }
     }

@@ -40,11 +40,18 @@ public class Monster : MonoBehaviour
     }
     public void Die()
     {
-       
+        
             GameObject coin = Resources.Load<GameObject>("Prefabs/Coin");
             coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
             Instantiate(coin);
-        
+
+        GameObject coin1 = Resources.Load<GameObject>("Prefabs/Coin");
+        coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
+        Instantiate(coin1);
+
+        GameObject coin2 = Resources.Load<GameObject>("Prefabs/Coin");
+        coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
+        Instantiate(coin2);
         Gamemanager.Instance.LevelUP();
         Hp = Gamemanager.Instance.Level * 30;
     }
