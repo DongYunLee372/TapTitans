@@ -34,7 +34,6 @@ public class Gamemanager : SingleTon<Gamemanager>
     public void Monstercreate(int num)
     {
         monster = Resources.Load<GameObject>("Prefabs/Monster" + num);
-
         Instantiate(monster);
     }
     public void LevelUP()
