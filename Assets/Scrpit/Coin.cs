@@ -89,6 +89,8 @@ public class Coin : SingleTon<Coin>
 
                     GameObject obj1 = GameObject.Find("Cube");
                     target = obj1.transform;
+
+                    Gamemanager.Instance.GetCoin();
                 }
             }
         }

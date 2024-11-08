@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
     {    
 
         monsteranimator = GetComponent<Animator>();
-        Hp = Gamemanager.Instance.Level * 30;
+        Hp = Gamemanager.Instance.C_lv * 30;
         Debug.Log(Hp);
         coinpool = FindObjectOfType<Coinpool>();
     }
@@ -41,10 +41,12 @@ public class Monster : MonoBehaviour
     }
     public void Die()
     {
-        coinpool.GetCoin(this.gameObject.transform.position + Vector3.up * 1f);
-            
+        for (int i = 0; i < Gamemanager.Instance.C_lv; i++)
+        {
+            coinpool.GetCoin(this.gameObject.transform.position + Vector3.up * 1f);
+        }
         Gamemanager.Instance.LevelUP();
-        Hp = Gamemanager.Instance.Level * 30;
+       
     }
 
     public void Changemonster()

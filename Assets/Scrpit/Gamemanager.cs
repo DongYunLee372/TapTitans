@@ -7,8 +7,11 @@ public class Gamemanager : SingleTon<Gamemanager>
     public GameObject monster;
     public GameObject Player;
     public int Level=1;
+    public int Bosslv = 1;
+    public int C_lv = 1;
     public int PlayerCoin = 0;
     public int playerdamage = 1;
+    public bool nextstage = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +41,29 @@ public class Gamemanager : SingleTon<Gamemanager>
     }
     public void LevelUP()
     {
-        Level++;
+        if (Level < 4)
+        {
+            Level++;
+        }
+        else if ( nextstage==false)
+        {
+            Level = 1;
+            Bosslv++;
+            nextstage = true;
+        }
+        else
+        {
+            Level = 1;
+        }
+    }
+    public void Clear()
+    {
+        C_lv++;
+        nextstage = false;
+        Level = 1;
     }
     public void GetCoin()
     {
-        PlayerCoin+=Level;
+        PlayerCoin+=1;
     }
 }
