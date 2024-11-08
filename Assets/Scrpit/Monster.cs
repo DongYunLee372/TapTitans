@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     public float delaytime = 0f;
 
     public Animator monsteranimator;
-
+    private Coinpool coinpool;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
         monsteranimator = GetComponent<Animator>();
         Hp = Gamemanager.Instance.Level * 30;
         Debug.Log(Hp);
+        coinpool = FindObjectOfType<Coinpool>();
     }
 
     // Update is called once per frame
@@ -40,18 +41,8 @@ public class Monster : MonoBehaviour
     }
     public void Die()
     {
-        
-            GameObject coin = Resources.Load<GameObject>("Prefabs/Coin");
-            coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
-            Instantiate(coin);
-
-        GameObject coin1 = Resources.Load<GameObject>("Prefabs/Coin");
-        coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
-        Instantiate(coin1);
-
-        GameObject coin2 = Resources.Load<GameObject>("Prefabs/Coin");
-        coin.transform.position = this.gameObject.transform.position + Vector3.up * 1f;
-        Instantiate(coin2);
+        coinpool.GetCoin(this.gameObject.transform.position + Vector3.up * 1f);
+            
         Gamemanager.Instance.LevelUP();
         Hp = Gamemanager.Instance.Level * 30;
     }

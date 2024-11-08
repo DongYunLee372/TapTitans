@@ -9,6 +9,7 @@ public class PlayerController : SingleTon<PlayerController>
     public Animator m_animator;
     private int m_currentAttack = 0;
     public float delaytime=0f;
+
     void Start()
     {
         m_animator = GetComponent<Animator>();

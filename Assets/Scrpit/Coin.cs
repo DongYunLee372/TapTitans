@@ -14,6 +14,7 @@ public class Coin : SingleTon<Coin>
     private float rand;
     private bool drop = false;
     private float t;
+    private Coinpool coinpool;
     void Start()
     {
         rand = Random.Range(-6f, 6f);
@@ -21,6 +22,8 @@ public class Coin : SingleTon<Coin>
         startPosition = transform.position;
         controlPoint = startPosition + Vector3.up * 2f; // 임의의 높이로 제어점 설정
         timeElapsed = 0f;
+
+        coinpool = FindObjectOfType<Coinpool>(); //풀을 찾아 참조
     }
 
     void Update()
@@ -60,7 +63,7 @@ public class Coin : SingleTon<Coin>
             // 목표 지점에 도달하면 오브젝트 삭제
             if (t >= 1f)
             {
-                 Destroy(gameObject);
+                coinpool.ReturnCoin(this.gameObject);
             }
             else
             {
@@ -85,7 +88,6 @@ public class Coin : SingleTon<Coin>
                     controlPoint = startPosition + Vector3.up * 2f;
 
                     GameObject obj1 = GameObject.Find("Cube");
-                    Debug.Log(obj1);
                     target = obj1.transform;
                 }
             }
