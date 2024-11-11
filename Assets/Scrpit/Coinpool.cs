@@ -17,6 +17,7 @@ public class Coinpool : MonoBehaviour
             GameObject coin = Instantiate(coinPrefabs);
             coin.SetActive(false);
             coinpool.Enqueue(coin);
+            
         }
     }
     public GameObject GetCoin(Vector3 position)

@@ -63,6 +63,7 @@ public class Coin : SingleTon<Coin>
             // 목표 지점에 도달하면 오브젝트 삭제
             if (t >= 1f)
             {
+                Resetting();
                 coinpool.ReturnCoin(this.gameObject);
             }
             else
@@ -98,5 +99,15 @@ public class Coin : SingleTon<Coin>
     public void Create(Vector3 pos)
     {
        
+    }
+    public void Resetting()
+    {
+        drop = false;
+        rand = Random.Range(-6f, 6f);
+        targ = new Vector3(rand, -2.5f, 0);
+        startPosition = transform.position;
+        controlPoint = startPosition + Vector3.up * 2f; // 임의의 높이로 제어점 설정
+        timeElapsed = 0f;
+
     }
 }

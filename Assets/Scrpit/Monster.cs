@@ -41,7 +41,7 @@ public class Monster : MonoBehaviour
     }
     public void Die()
     {
-        for (int i = 0; i < Gamemanager.Instance.C_lv; i++)
+        for (int i = 0; i < 20; i++)
         {
             coinpool.GetCoin(this.gameObject.transform.position + Vector3.up * 1f);
         }
