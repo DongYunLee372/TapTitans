@@ -10,14 +10,14 @@ public class DoTweenCoin : MonoBehaviour
     public Vector3 targ;
     private float rand;
     private Coinpool coinpool;
-    public Transform target; // 코인이 향하는 목표 (플레이어 등)
+    public Vector3 target; // 코인이 향하는 목표 (플레이어 등)
     private bool drop = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rand = Random.Range(-6f, 6f);
-        targ = new Vector3(rand, -2.8f, 0);
+        rand = Random.Range(-3.5f, 3.5f);
+        targ = new Vector3(rand, -1f, 0);
         startPosition = transform.position;
         original = transform.position;
         coinpool = FindObjectOfType<Coinpool>(); //풀을 찾아 참조
@@ -50,8 +50,8 @@ public class DoTweenCoin : MonoBehaviour
         Vector3[] path = new Vector3[]
         {
            startPosition,           //시작점
-            (startPosition+target.transform.position  )/2, //두점사이의 중간값을 계산 
-            target.transform.position                    //끝점
+            (startPosition+target  )/2, //두점사이의 중간값을 계산 
+            target                    //끝점
         };
 
         // 경로를 따라 1초 동안 이동, 경로 유형은 CatmullRom으로 설정
@@ -77,8 +77,15 @@ public class DoTweenCoin : MonoBehaviour
                     drop = true;
                     startPosition = transform.position;
                   
-                    GameObject obj1 = GameObject.Find("Cube");
-                    target = obj1.transform;
+                    GameObject obj1 = GameObject.Find("UIcoin");
+                    RectTransform uiRect = obj1.GetComponent<RectTransform>();
+                    Vector2 screenPos = uiRect.position;
+                    Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 0));
+                    target = worldPos;
+
+                    //target = Camera.main.WorldToScreenPoint(obj1.transform.position) ;
+             
+                    // Camera.main.WorldToScreenPoint(obj1.transform.position);
                     Setpos1();
                     Gamemanager.Instance.GetCoin();
                 }
@@ -88,8 +95,8 @@ public class DoTweenCoin : MonoBehaviour
 
     public void Resetting()
     {
-        rand = Random.Range(-6f, 6f);
-        targ = new Vector3(rand, -2.8f, 0);
+        rand = Random.Range(-3.5f, 3.5f);
+        targ = new Vector3(rand, -1f, 0);
         startPosition = transform.position;
     }
    
