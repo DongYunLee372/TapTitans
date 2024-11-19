@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class DoTweenCoin : MonoBehaviour
 {
+    private Camera main;
     private Vector3 original;
     private Vector3 startPosition;
     public Vector3 targ;
@@ -16,6 +17,7 @@ public class DoTweenCoin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        main = Camera.main;
         rand = Random.Range(-3.5f, 3.5f);
         targ = new Vector3(rand, -1f, 0);
         startPosition = transform.position;
@@ -79,11 +81,9 @@ public class DoTweenCoin : MonoBehaviour
                   
                     GameObject obj1 = GameObject.Find("UIcoin");
                     RectTransform uiRect = obj1.GetComponent<RectTransform>();
-                    Vector2 screenPos = uiRect.position;
-                    Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 0));
-                    target = worldPos;
-
-                    //target = Camera.main.WorldToScreenPoint(obj1.transform.position) ;
+                    Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(main, uiRect.position);
+                    Vector3 worldTargetPos = main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, main.nearClipPlane));
+                    target = worldTargetPos;
              
                     // Camera.main.WorldToScreenPoint(obj1.transform.position);
                     Setpos1();

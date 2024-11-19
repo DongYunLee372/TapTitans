@@ -715,11 +715,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 1a46b639-c38b-4bfe-9dc6-954b242f4b32
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: TapTitans
+  organizationId: dlehdgus1089
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
